@@ -23,6 +23,28 @@ namespace Milty.Models
         public IList<string> AccessLevel { get; set; }
     }
 
+    public class ListViewModel
+    {
+        public string Id { get; set; }
+        [Display(Name = "Адрес электронной почты")]
+        public string Email { get; set; }
+        [Display(Name = "Имя")]
+        public string Firstname { get; set; }
+        [Display(Name = "Фамилия")]
+        public string Lastname { get; set; }
+        [Display(Name = "Уровень доступа")]
+        public IList<string> AccessLevel { get; set; }
+
+        public ListViewModel(string Id, string Email, string Firstname, string Lastname, IList<string> AccessLevel)
+        {
+            this.Id = Id;
+            this.Email = Email;
+            this.Firstname = Firstname;
+            this.Lastname = Lastname;
+            this.AccessLevel = AccessLevel;
+        }
+    }
+
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }
