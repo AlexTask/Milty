@@ -246,14 +246,13 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Models\UserTask.cs" />
-    <Compile Include="Models\UserTasksController.cs" />
+    <Compile Include="Controllers\UserTasksController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddFirstname.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -290,7 +289,6 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <Content Include="AddFirstname.cshtml" />
     <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\Milty20190329101237 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -343,9 +341,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\knockout.validation.min.js.map" />
-    <Content Include="ViewPage1.cshtml" />
-    <Content Include="Views\Tasks\index.cshtml" />
-    <Content Include="Views\Tasks\AddTask.cshtml" />
     <Content Include="Views\UserTasks\Create.cshtml" />
     <Content Include="Views\UserTasks\Delete.cshtml" />
     <Content Include="Views\UserTasks\Details.cshtml" />
