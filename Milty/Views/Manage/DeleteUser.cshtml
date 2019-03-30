@@ -1,0 +1,66 @@
+﻿@model Milty.Models.EditUserModel
+
+@{
+    ViewBag.Title = "Удалить пользователя";
+}
+
+
+@{
+    var userRole = "";
+    if (Model.AccessLevel.Count > 0)
+    {
+        userRole = Model.AccessLevel.First<string>();
+    }
+}
+
+<h2>@ViewBag.Title.</h2>
+<h3>Вы действительно хотите удалить этого пользователя? За что?</h3>
+<div>
+    @using (Html.BeginForm("DeleteUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(Model => Model.Id)
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.AccessLevel, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <span class="col-md-2 control-label form-label">
+                    @userRole
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <span class="col-md-2 control-label form-label">
+                    @Html.DisplayFor(Model => Model.Email, new { @class = "form-control" })
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Firstname, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <span class="col-md-2 control-label form-label">
+                    @Html.DisplayFor(Model => Model.Firstname, new { @class = "form-control" })
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Lastname, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <span class="col-md-2 control-label form-label">
+                    @Html.DisplayFor(Model => Model.Lastname, new { @class = "form-control" })
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Удалить" />
+            </div>
+        </div>
+    }
+</div>
+

@@ -138,6 +138,36 @@ namespace Milty.Controllers
 
         }
 
+        // GET: /Manage/DeleteUser
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DeleteUser(string id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("List", "Manage");
+            }
+
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return RedirectToAction("List", "Manage");
+            }
+            IList<string> userRoles = await UserManager.GetRolesAsync(user.Id);
+            return View(new EditUserModel(user.Id, user.Email, user.Firstname, user.Lastname, userRoles));
+        }
+
+        // POST: /Manage/DeleteUser
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> DeleteUser(EditUserModel model)
+        {
+            var user = await UserManager.FindByIdAsync(model.Id);
+            await UserManager.DeleteAsync(user);
+
+            return RedirectToAction("List", "Manage");
+
+        }
+
 
 
         //
