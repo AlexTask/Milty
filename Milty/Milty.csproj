@@ -237,11 +237,16 @@
     <Compile Include="Migrations\201903301421474_2.Designer.cs">
       <DependentUpon>201903301421474_2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903302131027_3.cs" />
+    <Compile Include="Migrations\201903302131027_3.Designer.cs">
+      <DependentUpon>201903302131027_3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Models\Repository.cs" />
     <Compile Include="Models\UserTask.cs" />
     <Compile Include="Controllers\UserTasksController.cs" />
     <Compile Include="Models\UserViewModel.cs" />
@@ -349,6 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -385,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903301421474_2.resx">
       <DependentUpon>201903301421474_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903302131027_3.resx">
+      <DependentUpon>201903302131027_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
