@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -82,6 +83,21 @@ namespace Milty.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        // GET: /Manage/List
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> List(ManageMessageId? message)
+        {
+            ApplicationDbContext UsersContext = new ApplicationDbContext();
+
+            List<ListViewModel> UsersList = new List<ListViewModel>();
+            foreach (var user in UsersContext.Users.ToList()) {
+                IList<string> userRoles = await UserManager.GetRolesAsync(user.Id);
+                UsersList.Add(new ListViewModel(user.Id, user.Email, user.Firstname, user.Lastname, userRoles));
+            }
+
+            return View(UsersList);
         }
 
         //
