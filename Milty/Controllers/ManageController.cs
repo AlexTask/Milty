@@ -64,12 +64,18 @@ namespace Milty.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
+                Email = await UserManager.GetEmailAsync(userId),
+                Firstname = user.Firstname,
+                Lastname = user.Lastname,
+                AccessLevel = user.AccessLevel,
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
@@ -128,6 +134,28 @@ namespace Milty.Controllers
                 await UserManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
+        }
+
+        //
+        // GET: /Manage/UpdateProfile
+        public ActionResult UpdateProfile()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/UpdateProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateProfile(UpdateProfileViewModel model)
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            user.Firstname = model.Firstname;
+            user.Lastname = model.Lastname;
+            await UserManager.UpdateAsync(user);
+
+            return RedirectToAction("Index", "Manage");
+
         }
 
         //

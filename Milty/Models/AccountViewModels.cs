@@ -87,6 +87,15 @@ namespace Milty.Models
 
         [Display(Name = "Место рождения")]
         public string Hometown { get; set; }
+
+        [Display(Name = "Имя")]
+        public string Firstname { get; set; }
+
+        [Display(Name = "Фамилия")]
+        public string Lastname { get; set; }
+
+        [Display(Name = "Тип аккаунта")]
+        public string AccessLevel { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -4405,6 +4405,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     margin-bottom: 0;
     vertical-align: middle;
   }
+  .form-label {
+	text-align: left !important;
+	padding-left: 0;
+  }
   .navbar-form .radio,
   .navbar-form .checkbox {
     display: inline-block;
