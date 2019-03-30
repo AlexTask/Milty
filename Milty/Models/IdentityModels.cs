@@ -36,5 +36,7 @@ namespace Milty.Models
         }
 
         public System.Data.Entity.DbSet<Milty.Models.UserTask> UserTasks { get; set; }
+
+        public System.Data.Entity.DbSet<Milty.Models.Repository> Repositories { get; set; }
     }
 }
