@@ -12,7 +12,6 @@ namespace Milty.Models
         public string Hometown { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public string AccessLevel { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -34,5 +33,7 @@ namespace Milty.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Milty.Models.UserTask> UserTasks { get; set; }
     }
 }

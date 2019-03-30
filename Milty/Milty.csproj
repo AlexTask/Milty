@@ -232,11 +232,21 @@
     <Compile Include="Migrations\201903291956148_InitialCreate.Designer.cs">
       <DependentUpon>201903291956148_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903300138349_1.cs" />
+    <Compile Include="Migrations\201903300138349_1.Designer.cs">
+      <DependentUpon>201903300138349_1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903300232537_2.cs" />
+    <Compile Include="Migrations\201903300232537_2.Designer.cs">
+      <DependentUpon>201903300232537_2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Models\UserTask.cs" />
+    <Compile Include="Models\UserTasksController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -334,6 +344,13 @@
     </Content>
     <Content Include="Scripts\knockout.validation.min.js.map" />
     <Content Include="ViewPage1.cshtml" />
+    <Content Include="Views\Tasks\index.cshtml" />
+    <Content Include="Views\Tasks\AddTask.cshtml" />
+    <Content Include="Views\UserTasks\Create.cshtml" />
+    <Content Include="Views\UserTasks\Delete.cshtml" />
+    <Content Include="Views\UserTasks\Details.cshtml" />
+    <Content Include="Views\UserTasks\Edit.cshtml" />
+    <Content Include="Views\UserTasks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -370,6 +387,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903291956148_InitialCreate.resx">
       <DependentUpon>201903291956148_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903300138349_1.resx">
+      <DependentUpon>201903300138349_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903300232537_2.resx">
+      <DependentUpon>201903300232537_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

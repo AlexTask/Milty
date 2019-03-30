@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -65,6 +67,7 @@ namespace Milty.Controllers
 
             var userId = User.Identity.GetUserId();
             var user = await UserManager.FindByIdAsync(userId);
+            IList<string> userRoles = await UserManager.GetRolesAsync(userId);
 
             var model = new IndexViewModel
             {
@@ -75,7 +78,7 @@ namespace Milty.Controllers
                 Email = await UserManager.GetEmailAsync(userId),
                 Firstname = user.Firstname,
                 Lastname = user.Lastname,
-                AccessLevel = user.AccessLevel,
+                AccessLevel = userRoles,
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
