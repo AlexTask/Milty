@@ -15,12 +15,10 @@ namespace Milty.Migrations
                     Name = c.String(nullable: false, maxLength: 256),
                 })
                 .PrimaryKey(t => t.Id);
-            DropColumn("dbo.AspNetUsers", "AccessLevel");
         }
 
         public override void Down()
         {
-            AddColumn("dbo.AspNetUsers", "AccessLevel", c => c.String());
             DropTable("dbo.Repository");
         }
     }
