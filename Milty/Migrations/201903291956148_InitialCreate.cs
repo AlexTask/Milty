@@ -36,6 +36,8 @@ namespace Milty.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Hometown = c.String(),
+                        Firstname = c.String(),
+                        Lastname = c.String(),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -75,7 +77,19 @@ namespace Milty.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
+            CreateTable(
+               "dbo.UserTasks",
+               c => new
+               {
+                   Id = c.Int(nullable: false, identity: true),
+                   Name = c.String(),
+                   Description = c.String(),
+                   User = c.String(),
+                   Tag = c.String(),
+                   Repository = c.String(),
+               })
+               .PrimaryKey(t => t.Id);
         }
         
         public override void Down()
