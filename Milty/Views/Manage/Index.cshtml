@@ -12,7 +12,7 @@
 	@using (Html.BeginForm("UpdateProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 	{
 		@Html.AntiForgeryToken()
-	<dl class="dl-horizontal">
+
 		<div class="form-group">
 			<label class="col-md-2 control-label" >Пароль</label>
 			<div class="col-md-10">
@@ -41,9 +41,12 @@
 			<div class="form-group">
 				@Html.LabelFor(Model => Model.AccessLevel, new { @class = "col-md-2 control-label" })
 				<div class="col-md-10">
-					<span class="col-md-2 control-label form-label">
-						@Html.ValueFor(Model => Model.AccessLevel)
-					</span>
+                    <span class="col-md-2 control-label form-label">
+                        @foreach (String role in Model.AccessLevel)
+                        {
+                            @role;
+                        }
+                    </span>
 				</div>
 			</div>
 
@@ -129,8 +132,7 @@
 					}
 				</dd>
 			*@
-			<dt></dt>
-			<dd>
+	
 
 				@*@if (Model.TwoFactor)
 				{
@@ -152,8 +154,7 @@
 						</text>
 					}
 				}*@
-			</dd>
-	</dl>
+			
 
 		<div class="form-group">
 			<div class="col-md-offset-2 col-md-10">

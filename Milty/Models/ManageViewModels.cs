@@ -19,8 +19,8 @@ namespace Milty.Models
         public string Firstname { get; set; }
         [Display(Name = "Фамилия")]
         public string Lastname { get; set; }
-        [Display(Name = "Тип аккаунта")]
-        public string AccessLevel { get; set; }
+        [Display(Name = "Уровень доступа")]
+        public IList<string> AccessLevel { get; set; }
     }
 
     public class ManageLoginsViewModel

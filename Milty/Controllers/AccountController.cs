@@ -58,9 +58,14 @@ namespace Milty.Controllers
         [HttpGet]
         public ActionResult Authorize()
         {
-            var claims = new ClaimsPrincipal(User).Claims.ToArray();
-            var identity = new ClaimsIdentity(claims, "Bearer");
-            AuthenticationManager.SignIn(identity);
+            try
+            {
+                var claims = new ClaimsPrincipal(User).Claims.ToArray();
+                var identity = new ClaimsIdentity(claims, "Bearer");
+                AuthenticationManager.SignIn(identity);
+            } catch (Exception) {
+                return new EmptyResult();
+            }
             return new EmptyResult();
         }
 
@@ -167,6 +172,7 @@ namespace Milty.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "User");
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Дополнительные сведения о включении подтверждения учетной записи и сброса пароля см. на странице https://go.microsoft.com/fwlink/?LinkID=320771.

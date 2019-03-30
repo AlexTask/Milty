@@ -94,8 +94,6 @@ namespace Milty.Models
         [Display(Name = "Фамилия")]
         public string Lastname { get; set; }
 
-        [Display(Name = "Тип аккаунта")]
-        public string AccessLevel { get; set; }
     }
 
     public class ResetPasswordViewModel

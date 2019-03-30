@@ -21,10 +21,14 @@
                 @Html.ActionLink("Milty", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-					<li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>
-					@*<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
-				</ul>
+                <ul class="nav navbar-nav">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Задачи", "Index", "UserTasks", new { area = "" }, null)</li>
+                    }
+                    @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
