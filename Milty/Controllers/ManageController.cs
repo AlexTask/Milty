@@ -100,6 +100,46 @@ namespace Milty.Controllers
             return View(UsersList);
         }
 
+        // GET: /Manage/EditUser
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> EditUser(string id)
+        {
+            if (id == null) {
+                return RedirectToAction("List", "Manage");
+            }
+
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return RedirectToAction("List", "Manage");
+            }
+            IList<string> userRoles = await UserManager.GetRolesAsync(user.Id);
+            return View(new EditUserModel(user.Id, user.Email, user.Firstname, user.Lastname, userRoles));
+        }
+
+        // POST: /Manage/EditUser
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> EditUser(EditUserModel model)
+        {
+            var user = await UserManager.FindByIdAsync(model.Id);
+            user.Email = model.Email;
+            user.UserName = model.Email;
+            user.Firstname = model.Firstname;
+            user.Lastname = model.Lastname;
+            await UserManager.UpdateAsync(user);
+
+            IList<string> userRoles = await UserManager.GetRolesAsync(user.Id);
+
+            await UserManager.RemoveFromRolesAsync(user.Id, userRoles.ToArray<string>());
+            await UserManager.AddToRolesAsync(user.Id, model.AccessLevel.ToArray<string>());
+
+            return RedirectToAction("List", "Manage");
+
+        }
+
+
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

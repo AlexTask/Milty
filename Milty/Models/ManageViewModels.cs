@@ -45,6 +45,50 @@ namespace Milty.Models
         }
     }
 
+    public class EditUserModel
+    {
+        public string Id { get; set; }
+        [Display(Name = "Адрес электронной почты")]
+        public string Email { get; set; }
+        [Display(Name = "Имя")]
+        public string Firstname { get; set; }
+        [Display(Name = "Фамилия")]
+        public string Lastname { get; set; }
+        [Display(Name = "Уровень доступа")]
+        public IList<string> AccessLevel { get; set; }
+
+        public EditUserModel() {
+        }
+
+        public EditUserModel(string Id, string Email, string Firstname, string Lastname, IList<string> AccessLevel)
+        {
+            this.Id = Id;
+            this.Email = Email;
+            this.Firstname = Firstname;
+            this.Lastname = Lastname;
+            this.AccessLevel = AccessLevel;
+        }
+    }
+
+    public class NewListItem
+    {
+        public string Text { get; set; }
+        public string Value { get; set; }
+        public bool Selected { get; set; }
+
+        public string GetSelected()
+        {
+            if (Selected)
+            {
+                return "selected='selected'";
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

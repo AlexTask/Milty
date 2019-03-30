@@ -31,12 +31,6 @@ namespace Milty.Migrations
             if (!roleManager.RoleExists("User"))
                 roleManager.Create(new IdentityRole("User"));
 
-            //context.Roles.AddOrUpdate(new IdentityRole { Name = "Admin" });
-            //context.Roles.AddOrUpdate(new IdentityRole { Name = "Teacher" });
-            //context.Roles.AddOrUpdate(new IdentityRole { Name = "User" });
-            //context.SaveChanges();
-            
-
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
 
             var adminUser = userManager.FindByName("admin@milty.com");
@@ -49,7 +43,6 @@ namespace Milty.Migrations
             if (!userManager.IsInRole(adminUser.Id, "Admin"))
                 userManager.AddToRole(adminUser.Id, "Admin");
 
-            userManager.AddToRole(adminUser.Id, "Admin");
         }
     }
 }

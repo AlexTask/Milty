@@ -233,14 +233,6 @@
     <Compile Include="Migrations\201903291956148_InitialCreate.Designer.cs">
       <DependentUpon>201903291956148_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201903300138349_1.cs" />
-    <Compile Include="Migrations\201903300138349_1.Designer.cs">
-      <DependentUpon>201903300138349_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903300232537_2.cs" />
-    <Compile Include="Migrations\201903300232537_2.Designer.cs">
-      <DependentUpon>201903300232537_2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -350,6 +342,7 @@
     <Content Include="Views\UserTasks\Index.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Manage\List.cshtml" />
+    <Content Include="Views\Manage\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -386,12 +379,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201903291956148_InitialCreate.resx">
       <DependentUpon>201903291956148_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903300138349_1.resx">
-      <DependentUpon>201903300138349_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903300232537_2.resx">
-      <DependentUpon>201903300232537_2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
