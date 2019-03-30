@@ -10,6 +10,9 @@ namespace Milty.Models
     public class ApplicationUser : IdentityUser
     {
         public string Hometown { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string AccessLevel { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

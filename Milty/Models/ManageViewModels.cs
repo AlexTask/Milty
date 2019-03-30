@@ -12,6 +12,15 @@ namespace Milty.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        [EmailAddress]
+        [Display(Name = "Адрес электронной почты")]
+        public string Email { get; set; }
+        [Display(Name = "Имя")]
+        public string Firstname { get; set; }
+        [Display(Name = "Фамилия")]
+        public string Lastname { get; set; }
+        [Display(Name = "Тип аккаунта")]
+        public string AccessLevel { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -64,6 +73,12 @@ namespace Milty.Models
         [Phone]
         [Display(Name = "Номер телефона")]
         public string Number { get; set; }
+    }
+
+    public class UpdateProfileViewModel
+    {
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
     }
 
     public class VerifyPhoneNumberViewModel
