@@ -24,14 +24,14 @@
                 <ul class="nav navbar-nav">
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>
+                        @*<li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>*@
                         <li>@Html.ActionLink("Задачи", "Index", "UserTasks", new { area = "" }, null)</li>
                     }
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Пользователи", "List", "Manage", new { area = "" }, null)</li>
                     }
-                    
+
                     @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "HelpPage" }, null)</li>*@
                 </ul>
                 @Html.Partial("_LoginPartial")

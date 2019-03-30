@@ -1,38 +1,31 @@
 ﻿@model Milty.Models.EditUserModel
 
 @{
-    ViewBag.Title = "Редактирование пользователя";
+    ViewBag.Title = "Создание пользователя";
 }
 
-
 @{
-    var userRole = "";
-    if (Model.AccessLevel.Count > 0)
-    {
-        userRole = Model.AccessLevel.First<string>();
-    }
-
     List<Milty.Models.NewListItem> listItems = new List<Milty.Models.NewListItem>();
 
     listItems.Add(new Milty.Models.NewListItem
     {
         Text = "User",
         Value = "User",
-        Selected = userRole.Equals("User")
+        Selected = false
     });
 
     listItems.Add(new Milty.Models.NewListItem
     {
         Text = "Teacher",
         Value = "Teacher",
-        Selected = userRole.Equals("Teacher")
+        Selected = false
     });
 
     listItems.Add(new Milty.Models.NewListItem
     {
         Text = "Admin",
         Value = "Admin",
-        Selected = userRole.Equals("Admin")
+        Selected = false
     });
 
 }
@@ -40,18 +33,18 @@
 <h2>@ViewBag.Title.</h2>
 
 <div>
-    <hr />
-    @using (Html.BeginForm("EditUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+
+    @using (Html.BeginForm("CreateUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(Model => Model.Id)
+        <hr />
         <div class="form-group">
             @Html.LabelFor(Model => Model.AccessLevel, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 <select class="form-control" id="AccessLevel" name="AccessLevel">
                     @foreach (Milty.Models.NewListItem listItem in listItems)
                     {
-                        <option value="@listItem.Value" @listItem.GetSelected()>@listItem.Text</option>
+                        <option value="@listItem.Value">@listItem.Text</option>
                     }
                 </select>
             </div>
@@ -61,6 +54,13 @@
             @Html.LabelFor(Model => Model.Email, new { @class = "col-md-2 control-label" })
             <div class="col-md-10">
                 @Html.TextBoxFor(Model => Model.Email, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(Model => Model.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(Model => Model.Password, new { @class = "form-control" })
             </div>
         </div>
 
@@ -80,7 +80,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Обновить" />
+                <input type="submit" class="btn btn-default" value="Создать" />
             </div>
         </div>
     }

@@ -56,6 +56,8 @@ namespace Milty.Models
         public string Lastname { get; set; }
         [Display(Name = "Уровень доступа")]
         public IList<string> AccessLevel { get; set; }
+        [Display(Name = "Пароль")]
+        public string Password { get; set; }
 
         public EditUserModel() {
         }

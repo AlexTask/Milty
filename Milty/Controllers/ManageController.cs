@@ -168,7 +168,40 @@ namespace Milty.Controllers
 
         }
 
+        // GET: /Manage/CreateUser
+        [Authorize(Roles = "Admin")]
+        public ActionResult CreateUser()
+        {
+            return View();
+        }
 
+        // POST: /Manage/CreateUser
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> CreateUser(EditUserModel model)
+        {
+            if (model.Email == null)
+            {
+                return View(model);
+            }
+            if (model.Password == null) {
+                return View(model);
+            }
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Firstname = model.Firstname, Lastname = model.Lastname };
+            var result = await UserManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                if (model.AccessLevel.Count > 0)
+                {
+                    await UserManager.AddToRoleAsync(user.Id, model.AccessLevel.First<string>());
+                }
+                
+                return RedirectToAction("List", "Manage");
+            }
+            
+            return View(model);
+        }
 
         //
         // POST: /Manage/RemoveLogin

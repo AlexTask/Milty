@@ -1,11 +1,14 @@
 ﻿@model IEnumerable<Milty.Models.ListViewModel>
 
 @{
-    ViewBag.Title = "Список пользователей";
+    ViewBag.Title = "Пользователи системы";
 }
 
 <h2>@ViewBag.Title.</h2>
 
+<p>
+    @Html.ActionLink("Создать пользователя", "CreateUser")
+</p>
 
 <table class="table">
     <tr>

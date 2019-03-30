@@ -1,7 +1,7 @@
 ﻿@model Milty.Models.UserTask
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Просмотр задачи";
 }
 
 <div>
@@ -11,7 +11,7 @@
         @Html.DisplayFor(model => model.Description)
     </p>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal dl-horizontal-new">
         <dt>
             @Html.DisplayNameFor(model => model.User)
         </dt>
@@ -41,7 +41,7 @@
 <p>
     @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Изменить", "Edit", new { id = Model.Id })
     }
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Вернуться к списку", "Index")
 </p>
