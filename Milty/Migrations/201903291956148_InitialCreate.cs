@@ -43,6 +43,7 @@ namespace Milty.Migrations
                         PasswordHash = c.String(),
                         SecurityStamp = c.String(),
                         PhoneNumber = c.String(),
+                        AccessLevel = c.String(),
                         PhoneNumberConfirmed = c.Boolean(nullable: false),
                         TwoFactorEnabled = c.Boolean(nullable: false),
                         LockoutEndDateUtc = c.DateTime(),
@@ -77,19 +78,6 @@ namespace Milty.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-
-            CreateTable(
-               "dbo.UserTasks",
-               c => new
-               {
-                   Id = c.Int(nullable: false, identity: true),
-                   Name = c.String(),
-                   Description = c.String(),
-                   User = c.String(),
-                   Tag = c.String(),
-                   Repository = c.String(),
-               })
-               .PrimaryKey(t => t.Id);
         }
         
         public override void Down()
