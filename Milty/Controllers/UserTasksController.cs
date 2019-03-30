@@ -34,11 +34,25 @@ namespace Milty.Models
         // GET: UserTasks
         public ActionResult Index()
         {
-            var useerTasks = db.UserTasks.ToList();
-            foreach (UserTask task in useerTasks) {
+            var userTasks = db.UserTasks.ToList();
+            foreach (UserTask task in userTasks) {
                 var userForTask = UserManager.FindById(task.User);
                 if (userForTask != null) 
                     task.User = userForTask.Lastname + " " + userForTask.Firstname;
+
+                if (task.Repository != null && task.Repository != "")
+                {
+                    try
+                    {
+                        Repository repository = db.Repositories.Find(int.Parse(task.Repository));
+                        if (repository != null)
+                        {
+                            task.Repository = repository.Name;
+                        }
+                    } catch (Exception) {
+                        task.Repository = "";
+                    }
+                }
             }
 
             return View(db.UserTasks.ToList());

@@ -2,6 +2,20 @@
 
 @{
     ViewBag.Title = "Редактирование задачи";
+
+    Milty.Models.ApplicationDbContext db = new Milty.Models.ApplicationDbContext();
+
+    List<Milty.Models.NewListItem> Repositoies = new List<Milty.Models.NewListItem>();
+
+    foreach (var repo in db.Repositories.ToList()) {
+        Repositoies.Add(new Milty.Models.NewListItem
+        {
+            Text = repo.Name,
+            Value = repo.Id.ToString(),
+            Selected = repo.Id.ToString().Equals(Model.Repository)
+        });
+    }
+
 }
 
 <h2>Редактирование задачи</h2>
@@ -43,8 +57,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Repository, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Repository, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Repository, "", new { @class = "text-danger" })
+                <select class="form-control" id="Repository" name="Repository">
+                    @foreach (Milty.Models.NewListItem listItem in Repositoies)
+                    {
+                        <option value="@listItem.Value" @listItem.GetSelected()>@listItem.Text</option>
+                    }
+                    <option value=""></option>
+                </select>
             </div>
         </div>
 
