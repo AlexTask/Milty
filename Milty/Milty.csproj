@@ -294,6 +294,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\Milty20190329101237 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\MiltyKoptel - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
