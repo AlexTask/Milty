@@ -2,6 +2,12 @@
 
 @{
     ViewBag.Title = "Удаление задачи";
+
+    var backRepo = "";
+    if (Request["backto"] != null)
+    {
+        backRepo = Request["backto"];
+    }
 }
 
 <h3>Вы действительно хотите удалить задачу?</h3>
@@ -43,9 +49,16 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Удалить" class="btn btn-default" /> 
+    <div class="form-actions no-color">
+        <input type="submit" value="Удалить" class="btn btn-default" />
+        @if (backRepo == "")
+        {
             @Html.ActionLink("Вернуться к списку", "Index")
-        </div>
+        }
+        else
+        {
+            @Html.ActionLink("Вернуться к списку", "Details", "Repositories", new { id = backRepo }, null)
+        }
+    </div>
     }
 </div>

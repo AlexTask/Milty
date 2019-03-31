@@ -25,12 +25,10 @@
                     @if (Request.IsAuthenticated)
                     {
                         @*<li>@Html.ActionLink("Домашняя страница", "Index", "Home", new { area = "" }, null)</li>*@
-                        <li>@Html.ActionLink("Задачи", "Index", "UserTasks", new { area = "" }, null)</li>
-                    }
-                    @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
-                    {
                         <li>@Html.ActionLink("Разделы", "Index", "Repositories", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Все задачи", "Index", "UserTasks", new { area = "" }, null)</li>
                     }
+
                     @if (User.IsInRole("Admin"))
                     {
                         <li>@Html.ActionLink("Пользователи", "List", "Manage", new { area = "" }, null)</li>

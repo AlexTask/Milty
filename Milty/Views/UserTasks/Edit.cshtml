@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Редактирование задачи";
 
+    var backRepo = "";
+    if (Request["backto"] != null)
+    {
+        backRepo = Request["backto"];
+    }
+
     Milty.Models.ApplicationDbContext db = new Milty.Models.ApplicationDbContext();
 
     List<Milty.Models.NewListItem> Repositoies = new List<Milty.Models.NewListItem>();
@@ -75,9 +81,16 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Вернуться к списку", "Index")
-</div>
+    <div>
+        @if (backRepo == "")
+        {
+            @Html.ActionLink("Вернуться к списку", "Index")
+        }
+        else
+        {
+            @Html.ActionLink("Вернуться к списку", "Details", "Repositories", new { id = backRepo }, null)
+        }
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -2,6 +2,11 @@
 
 @{
     ViewBag.Title = "Просмотр задачи";
+
+    var backRepo = "";
+    if (Request["backto"] != null) {
+        backRepo = Request["backto"];
+    }
 }
 
 <div>
@@ -43,5 +48,13 @@
     {
         @Html.ActionLink("Изменить", "Edit", new { id = Model.Id })
     }
-    @Html.ActionLink("Вернуться к списку", "Index")
+
+    @if (backRepo == "")
+    {
+        @Html.ActionLink("Вернуться к списку", "Index")
+    }
+    else
+    {
+        @Html.ActionLink("Вернуться к списку", "Details", "Repositories", new { id = backRepo }, null)
+    }
 </p>

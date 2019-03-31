@@ -82,7 +82,7 @@ namespace Milty.Models
         {
             if (Selected)
             {
-                return "selected='selected'";
+                return "selected=selected";
             }
             else
             {

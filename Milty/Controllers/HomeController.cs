@@ -10,7 +10,7 @@ namespace Milty.Controllers
     {
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "UserTasks");
+            return RedirectToAction("Index", "Repositories");
             //return View();
         }
     }

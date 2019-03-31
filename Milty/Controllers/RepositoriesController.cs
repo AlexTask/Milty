@@ -6,14 +6,30 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Milty.Models;
 
 namespace Milty.Controllers
 {
-    [Authorize(Roles = "Teacher,Admin")]
+    [Authorize]
     public class RepositoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Repositories
         public ActionResult Index()
@@ -31,12 +47,29 @@ namespace Milty.Controllers
             Repository repository = db.Repositories.Find(id);
             if (repository == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
-            return View(repository);
+
+            IEnumerable<UserTask> userTasks = db.UserTasks.Where(task => task.Repository.Equals(id.ToString()));
+
+            foreach (UserTask task in userTasks)
+            {
+                var userForTask = UserManager.FindById(task.User);
+                if (userForTask != null)
+                    task.User = userForTask.Lastname + " " + userForTask.Firstname;
+            }
+
+            DetailsRepositoryViewModel model = new DetailsRepositoryViewModel {
+                Id = repository.Id,
+                Name = repository.Name,
+                tasks = userTasks
+            };
+
+            return View(model);
         }
 
         // GET: Repositories/Create
+        [Authorize(Roles = "Teacher,Admin")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +80,7 @@ namespace Milty.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher,Admin")]
         public ActionResult Create([Bind(Include = "Id,Name")] Repository repository)
         {
             if (ModelState.IsValid)
@@ -60,6 +94,7 @@ namespace Milty.Controllers
         }
 
         // GET: Repositories/Edit/5
+        [Authorize(Roles = "Teacher,Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +114,7 @@ namespace Milty.Controllers
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Teacher,Admin")]
         public ActionResult Edit([Bind(Include = "Id,Name")] Repository repository)
         {
             if (ModelState.IsValid)
@@ -91,6 +127,7 @@ namespace Milty.Controllers
         }
 
         // GET: Repositories/Delete/5
+        [Authorize(Roles = "Teacher,Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -106,6 +143,7 @@ namespace Milty.Controllers
         }
 
         // POST: Repositories/Delete/5
+        [Authorize(Roles = "Teacher,Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

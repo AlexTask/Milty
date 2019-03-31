@@ -96,6 +96,11 @@ namespace Milty.Models
                 userTask.User = User.Identity.GetUserId();
                 db.UserTasks.Add(userTask);
                 db.SaveChanges();
+
+                if (userTask.Repository != null) {
+                    return RedirectToAction("Details", "Repositories", new { id = userTask.Repository });
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -130,6 +135,11 @@ namespace Milty.Models
             {
                 db.Entry(userTask).State = EntityState.Modified;
                 db.SaveChanges();
+
+                if (userTask.Repository != null)
+                {
+                    return RedirectToAction("Details", "Repositories", new { id = userTask.Repository });
+                }
                 return RedirectToAction("Index");
             }
             return View(userTask);
@@ -148,6 +158,10 @@ namespace Milty.Models
             {
                 return HttpNotFound();
             }
+
+            var userForTask = UserManager.FindById(userTask.User);
+            if (userForTask != null)
+                userTask.User = userForTask.Lastname + " " + userForTask.Firstname;
             return View(userTask);
         }
 
@@ -158,8 +172,15 @@ namespace Milty.Models
         public ActionResult DeleteConfirmed(int id)
         {
             UserTask userTask = db.UserTasks.Find(id);
+            var toRepo = userTask.Repository;
+
             db.UserTasks.Remove(userTask);
             db.SaveChanges();
+
+            if (userTask.Repository != null)
+            {
+                return RedirectToAction("Details", "Repositories", new { id = toRepo });
+            }
             return RedirectToAction("Index");
         }
 

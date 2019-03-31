@@ -247,6 +247,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MeViewModels.cs" />
     <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\RepositoryViewModels.cs" />
     <Compile Include="Models\UserTask.cs" />
     <Compile Include="Controllers\UserTasksController.cs" />
     <Compile Include="Models\UserViewModel.cs" />
